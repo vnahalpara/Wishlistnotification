@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="wishlistnotification_email_email_template" label="Ktpl Wishlistnotification" file="ktplwishlistnotification.html" type="html" module="Ktpl_Wishlistnotification" area="frontend"/>
+</config>
