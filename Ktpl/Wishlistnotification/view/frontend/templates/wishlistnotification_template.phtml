@@ -1,0 +1,42 @@
+<?php 
+$wishlistItem = $block->getWishlistItem($block->getWishlist());
+echo "<pre>";
+print_r($wishlistItem);
+echo "</pre>";
+for ($i=0; $i < count($wishlistItem); $i++) {
+$product = $block->getWishlistProduct($wishlistItem[$i]['product_id']);
+$image = $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_page_image_large')->keepAspectRatio(true)->getUrl();
+$price = $product->getPriceInfo()->getPrice('final_price')->getValue();
+$priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+$price = $priceHelper->currency($price, true, false);
+?>
+<li class="product-item">
+   <div class="product-item-info">
+      <a href="<?php echo $product->getProductUrl() ?>" class="product-item-photo">
+         <span class="product-image-container" style="width:240px;">
+            <span class="product-image-wrapper" style="padding-bottom: 125%;">
+               <img class="product-image-photo" src="<?php echo $image; ?>" width="240" height="300" alt="<?php echo $product->getData('image'); ?>">
+            </span>
+         </span>
+      </a>
+      <div class="product-item-details">
+         <strong class="product-item-name">
+            <a title="<?php echo $product->getName() ?>" href="<?php echo $product->getProductUrl() ?>" class="product-item-link"><?php echo $product->getName() ?></a>
+         </strong>
+         <div class="price-box price-final_price" data-role="priceBox">
+            <span class="price-container price-final_price tax weee">
+               <span id="old-price-1817-widget-product-grid" class="price-wrapper ">
+                  <span class="price"><?php echo $price  ?></span>
+               </span>
+            </span>
+         </div>
+      </div>
+   </div>
+</li>
+<?php } ?>
+
+<div class="product-item-actions">
+   <div class="actions-primary">
+      <a href="<?php echo $block->getUrl('wishlist');?>">View In Wishlist</a>
+   </div>
+</div>

@@ -2,7 +2,7 @@
 /**
  * Mail Transport
  */
-namespace Ktpl\Wishlistnotification\Model;
+namespace Ktpl\Gmailsmtp\Model;
  
 class Transport extends \Zend_Mail_Transport_Smtp implements \Magento\Framework\Mail\TransportInterface
 {
@@ -16,19 +16,21 @@ class Transport extends \Zend_Mail_Transport_Smtp implements \Magento\Framework\
      * @param null $parameters
      * @throws \InvalidArgumentException
      */
-    public function __construct(\Magento\Framework\Mail\MessageInterface $message)
+    public function __construct(\Magento\Framework\Mail\MessageInterface $message,\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig)
     {
         if (!$message instanceof \Zend_Mail) {
             throw new \InvalidArgumentException('The message should be an instance of \Zend_Mail');
         }
-         $smtpHost= 'smtp.gmail.com';//your smtp host  ';
-         $smtpConf = [
+        $email = $scopeConfig->getValue('gmailsmtp/smtp/email', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $password = $scopeConfig->getValue('gmailsmtp/smtp/password', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $smtpHost= 'smtp.gmail.com';//your smtp host  ';
+        $smtpConf = [
             'auth' => 'login',//auth type
             'ssl' => 'ssl', 
             'port' => '465',
-            'username' => 'vaibhavahalpara@gmail.com',//smtm user name
-            'password' => '1book@help.me'//smtppassword 
-         ];
+            'username' => $email, //smtm user name
+            'password' => $password //smtppassword 
+        ];
  
         parent::__construct($smtpHost, $smtpConf);
         $this->_message = $message;

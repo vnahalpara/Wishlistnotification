@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Backend/etc/system_file.xsd">
+    <system>
+        <tab id="ktpl" translate="label" sortOrder="200">
+            <label>Ktpl Config</label>
+        </tab>
+        <section id="gmailsmtp" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Gmail Smtp</label>
+            <tab>ktpl</tab>
+            <resource>Ktpl_Gmailsmtp::system_config</resource>
+            <group id="smtp" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gmail Options</label>
+                <field id="email" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Gmail Id</label>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="password" translate="label" type="password" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Password</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
